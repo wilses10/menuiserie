@@ -19,12 +19,13 @@ $message = $_POST['message'];
 $sql = "INSERT INTO contacts (name,email,phone,message)
 VALUES ('$name','$email','$phone','$message')";
 
-$conn->query($sql);
+if ($conn->query($sql) === TRUE) {
+    header("Location: contact.html?success=1");
+    exit();
+} else {
+    echo "Error: " . $conn->error;
+}
 
 $conn->close();
-
-/* redirection avec message */
-header("Location: contact.html?success=1");
-exit();
 
 ?>
